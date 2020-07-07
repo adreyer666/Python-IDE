@@ -16,7 +16,7 @@ RUN apt-get update \
 # dev languages and tools
 RUN apt-get install -y --no-install-recommends \
 	build-essential \
-	python3 python3-dev python3-pip python3-wheel \
+	python3 python3-dev python3-pip python3-venv python3-wheel \
 	git jq  \
 	pandoc fonts-dejavu
 	# meld

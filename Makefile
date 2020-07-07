@@ -1,12 +1,12 @@
 #!/usr/bin/env make
 
-IMAGE = devops
+IMAGE = python-ide
 
 build: Makefile Dockerfile
 	buildah bud -f Dockerfile -t $(IMAGE)
 
-run:
-	x11docker --podman --sudouser --user=RETAIN --xpra --pulseaudio $(IMAGE)
+test:
+	./python-ide
 
 clean:
 	podman image rm localhost/$(IMAGE)

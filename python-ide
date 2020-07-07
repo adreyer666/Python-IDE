@@ -1,0 +1,6 @@
+#!/bin/sh -f
+
+WS="${1:-`pwd`}"
+IMAGE=python-ide
+x11docker --podman --sudouser --user=RETAIN --xpra --pulseaudio -- -v ${WS}:/workspace -- ${IMAGE}
+
