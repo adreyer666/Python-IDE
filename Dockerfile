@@ -4,24 +4,22 @@ ARG DEBIAN_FRONTEND=noninteractive
 
 # install just enough system and X11
 RUN apt-get update \
-    && apt-get upgrade -y \
-    && apt-get install -y --no-install-recommends \
+    && apt-get upgrade -q -y \
+    && apt-get install -q -y --no-install-recommends \
 	procps iproute2 \
 	curl ca-certificates gpg sudo \
 	xauth x11-apps xterm \
 	libxtst6 libasound2 \
 	fakeroot gpg-agent xdg-utils
-#       libgtk2.0-0 libxss1 dbus
 
 # dev languages and tools
-RUN apt-get install -y --no-install-recommends \
+RUN apt-get install -q -y --no-install-recommends \
 	build-essential \
 	python3 python3-dev python3-pip python3-venv python3-wheel \
-	git jq  \
+	git \
 	pandoc fonts-dejavu
-	# meld
 
-RUN apt-get install -y --no-install-recommends \
+RUN apt-get install -q -y --no-install-recommends \
 	python3-setuptools \
 	python3-autopep8 \
 	python3-flake8 python3-flake8-docstrings \
@@ -78,21 +76,6 @@ RUN apm install \
 ## 	dbg-gdb \
 ## 	platformio-ide-terminal \
 ## 	atom-ide-ui
-
-
-## # podman & kubernetes
-## RUN apt-get install -y --no-install-recommends \
-## 	ansible \
-## 	podman buildah umoci \
-## 	kubernetes-client kubetail
-
-# install firefox
-#RUN apt-get install -y --no-install-recommends firefox
-
-# install zsh
-RUN apt-get install -y --no-install-recommends zsh
-#RUN curl -Lo install.sh https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh
-#RUN /bin/sh install.sh --unattended
 
 # ensure that we have a clean installation
 RUN apt-get install -f

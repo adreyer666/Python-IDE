@@ -5,13 +5,13 @@ A simple portable python IDE environment
 ## Prep OS
 ```
 apt install \
-	curl ca-certificates gpg sudo \
-	xauth x11-apps xterm \
-	libxtst6 libasound2 \
-	fakeroot gpg-agent xdg-utils \
-	git jq \
+    curl ca-certificates gpg sudo \
+    xauth x11-apps xterm \
+    libxtst6 libasound2 \
+    fakeroot gpg-agent xdg-utils \
+    git jq \
     build-essential \
-	pandoc fonts-dejavu
+    pandoc fonts-dejavu
 ```
 
 ## Interpreter and basic packages
@@ -32,13 +32,13 @@ ls -la ~/.local/lib/python*/site-packages/
 ### Install system packages and global pip packages
 ```
 apt install \
-    python3 python3-dev python3-pip \
+    python3 python3-dev python3-pip python3-wheel \
     python3-pytest pylint flake8 pyflakes3
 apt install \
-	python3-setuptools \
-    python3-wheel python3-pydocstyle \
+    python3-setuptools \
+    python3-pydocstyle \
     python3-aniso8601 python3-click python3-autopep8 python3-pep8 \
-	python3-mccabe python3-flake8 python3-flake8-docstrings \
+    python3-mccabe python3-flake8 python3-flake8-docstrings \
     python3-pylint-common python3-pylint-plugin-utils \
     python3-pylint-django python3-pylint-flask \
     python3-pycodestyle python3-pytoml python3-toml python3-yapf \
@@ -99,6 +99,4 @@ apm install \
     rest-client \
     tidy-markdown
 ```
-
-
 
