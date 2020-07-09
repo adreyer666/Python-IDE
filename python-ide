@@ -2,5 +2,6 @@
 
 WS="${1:-`pwd`}"
 IMAGE=python-ide
-x11docker --podman --sudouser --user=RETAIN --xpra --pulseaudio -- -v ${WS}:/workspace -- ${IMAGE}
+#x11docker --podman --sudouser --user=RETAIN --xpra --pulseaudio -- -v ${WS}:/workspace -- ${IMAGE}
+x11docker --podman --user=RETAIN --nxagent -- -v ${WS}:/workspace -- ${IMAGE}
 
