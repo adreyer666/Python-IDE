@@ -6,7 +6,7 @@ ARG DEBIAN_FRONTEND=noninteractive
 RUN apt-get update \
     && apt-get upgrade -q -y \
     && apt-get install -q -y --no-install-recommends \
-	procps iproute2 \
+	apt-utils procps iproute2 \
 	curl ca-certificates gpg sudo \
 	xauth x11-apps xterm \
 	libxtst6 libasound2 \
