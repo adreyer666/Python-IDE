@@ -8,9 +8,10 @@ RUN apt-get update \
     && apt-get install -q -y --no-install-recommends \
 	apt-utils procps iproute2 \
 	curl ca-certificates gpg sudo \
+	vim-tiny less mlocate fakeroot gpg-agent \
 	xauth x11-apps xterm \
 	libxtst6 libasound2 \
-	fakeroot gpg-agent xdg-utils
+	xdg-utils darkmint-gtk-theme gtk-theme-switch gnome-tweaks
 
 # dev languages and tools
 RUN apt-get install -q -y --no-install-recommends \
@@ -88,6 +89,8 @@ ENV PASS  user
 RUN useradd -d /home/user -m -s /bin/bash $USER
 RUN echo "$USER:$PASS" | chpasswd
 RUN echo "$USER   ALL=(ALL:ALL) NOPASSWD: ALL"  > /etc/sudoers.d/$USER
+RUN mkdir -p /home/user/.atom/config.cson
+COPY .atom.config.cson /home/user/.atom/config.cson
 RUN mkdir -p /workspace && chown -R $USER: /workspace
 
 # --- from now on run as user --- #
