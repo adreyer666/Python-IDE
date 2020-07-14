@@ -38,6 +38,23 @@ RUN curl -L https://packagecloud.io/AtomEditor/atom/gpgkey | apt-key add - \
 #    && dpkg -i /tmp/atom.deb \
 #    && apt-get install -f
 
+# ensure that we have a clean installation
+RUN apt-get install -f
+RUN apt-get clean && rm -rf /tmp/* /var/lib/apt/lists/* /var/cache/apt/archives/partial
+
+# --- create user and workarea --- #
+# change user so application does not run as root
+ENV USER  user
+ENV PASS  user
+RUN useradd -d /home/user -m -s /bin/bash $USER
+RUN echo "$USER:$PASS" | chpasswd
+RUN echo "$USER   ALL=(ALL:ALL) NOPASSWD: ALL"  > /etc/sudoers.d/$USER
+RUN mkdir -p /home/user/.atom/config.cson
+COPY .atom.config.cson /home/user/.atom/config.cson
+RUN mkdir -p /workspace && chown -R $USER: /workspace
+
+# --- from now on run as user --- #
+USER $USER
 # atom extensions
 RUN apm install \
 	busy-signal \
@@ -78,23 +95,6 @@ RUN apm install \
 ## 	platformio-ide-terminal \
 ## 	atom-ide-ui
 
-# ensure that we have a clean installation
-RUN apt-get install -f
-RUN apt-get clean && rm -rf /tmp/* /var/lib/apt/lists/* /var/cache/apt/archives/partial
-
-# --- create user and workarea --- #
-# change user so application does not run as root
-ENV USER  user
-ENV PASS  user
-RUN useradd -d /home/user -m -s /bin/bash $USER
-RUN echo "$USER:$PASS" | chpasswd
-RUN echo "$USER   ALL=(ALL:ALL) NOPASSWD: ALL"  > /etc/sudoers.d/$USER
-RUN mkdir -p /home/user/.atom/config.cson
-COPY .atom.config.cson /home/user/.atom/config.cson
-RUN mkdir -p /workspace && chown -R $USER: /workspace
-
-# --- from now on run as user --- #
-USER $USER
 WORKDIR /workspace
 CMD [ "atom", "-f", "--no-sandbox" ]
 

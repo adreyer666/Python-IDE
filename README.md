@@ -65,12 +65,12 @@ apt install -y --no-install-recommends atom
 
 ### Check additional atom packages as user (!)
 ```
-apm list
+su - user -c "apm list"
 ```
 
 ### Install additional atom packages as user (!)
 ```
-apm install \
+su - user -c apm install \
     busy-signal \
     intentions \
 	auto-detect-indentation \
